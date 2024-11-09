@@ -4,37 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Météo par Lieu</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Obtenez la météo d'un lieu</h1>
-    <input type="text" id="location" placeholder="Entrez un lieu (ex: Paris)">
-    <button onclick="getWeather()">Obtenir la météo</button>
-    <div id="result"></div>
+    <div class="container">
+        <h1>Obtenez la météo d'un lieu</h1>
+        <input type="text" id="location" placeholder="Entrez un lieu (ex: Paris)">
+        <button onclick="getWeather()">Obtenir la météo</button>
+        <div id="result"></div>
+    </div>
 
-    <script>
-        async function getWeather() {
-            const location = document.getElementById('location').value;
-            const apiKeyGeo = '####youAPIKEY####3';
-            const apiKeyWeather = '####YourAPIKEY####';
+    <footer>
+        <p>&copy; 2024 ABDALLAH Wael. Tous droits réservés.</p>
+    </footer>
 
-            // Étape 1 : Récupérer les coordonnées géographiques
-            const geoUrl = `https://api.opencagedata.com/geocode/v1/json?q=${location}&key=${apiKeyGeo}`;
-            const geoResponse = await fetch(geoUrl);
-            const geoData = await geoResponse.json();
-            const { lat, lng } = geoData.results[0].geometry;
-
-            // Étape 2 : Obtenir la météo en utilisant les coordonnées
-            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKeyWeather}&units=metric`;
-            const weatherResponse = await fetch(weatherUrl);
-            const weatherData = await weatherResponse.json();
-
-            // Afficher le résultat
-            document.getElementById('result').innerHTML = `
-                <h2>Météo à ${location}</h2>
-                <p>Température : ${weatherData.main.temp}°C</p>
-                <p>Conditions : ${weatherData.weather[0].description}</p>
-            `;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
